@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+import { Container } from './components/Container'
+import { Navbar } from './components/Navbar'
+import { VideoContainer } from './components/VideoContainer'
 
-function App() {
+export default function App() {
+  const [loading, setLoading] = useState(true)
+  const [playlists, setPlaylists] = useState([])
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const getData = async () => {
+    try {
+      const response = await axios.get('https://s3-ap-southeast-1.amazonaws.com/pacmannai.com/static/json/playlist.json')
+      const data = await response.data
+
+      setPlaylists(data.data)
+      setLoading(false)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Container>
+      <Navbar />
+      <VideoContainer playlists={playlists} />
+    </Container>
+  )
 }
-
-export default App;
