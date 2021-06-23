@@ -16,7 +16,14 @@ export const VideoContainer = ({ playlists }) => {
 
   return (
     <div className="md:grid md:grid-cols-3 md:gap-6 mt-6">
-      <VideoPlayer currentVideo={currentVideo} />
+      {currentVideo ?
+        <VideoPlayer currentVideo={currentVideo} /> :
+        <div className="md:col-span-2 flex justify-center items-center border border-gray-200">
+          <h1 className="text-4xl text-gray-300">
+            No Video is Playing
+          </h1>
+        </div>
+      }
       <VideoList playlists={playlists} setCurrentVideo={setCurrentVideo} />
     </div>
   )

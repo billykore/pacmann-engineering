@@ -1,5 +1,5 @@
 export const Navbar = () => {
-  const url = 'https://github.com/billykore'
+  const url = 'https://github.com/billykore/pacmann-engineering'
 
   return (
     <nav className="flex justify-between item-center px-4 py-5 border-b border-gray-200">

@@ -1,5 +1,4 @@
 export const VideoPlayer = ({ currentVideo }) => {
-
   return (
     <div className="border-b border-gray-200 md:border-none md:col-span-2">
       <iframe
